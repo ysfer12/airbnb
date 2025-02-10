@@ -3,27 +3,27 @@
 
 namespace Core\Model;
 
-// use Core\Mapper\Mapper;
+use Core\Database\Database;
 
 class BaseModel
 {
 
-  // protected $db;
+  protected $conn;
 
 
-  // public function __construct()
-  // {
-  //   // get database conn
-  // }
+  public function __construct()
+  {
+    Database::getConnection();
+  }
 
 
 
-  // public function query($sql, $params = [])
-  // {
-  //   $stmt = $this->db->prepare($sql);
-  //   $stmt->execute($params);
-  //   return $stmt;
-  // }
+  public function query($sql, $params = [])
+  {
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute($params);
+    return $stmt;
+  }
 
 
 }
