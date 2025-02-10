@@ -33,7 +33,6 @@ class HomeControllers
     ];
 
 
-    dump();
 
     view('front/home', $data);
 

@@ -16,7 +16,6 @@
   $dotenv->load();
   
 
-  echo 'hh';
   
   echo $_ENV['APP_NAME'];
   
