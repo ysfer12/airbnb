@@ -18,11 +18,7 @@ class App
   
     $requestRoute = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-
     $requestRoute = $requestRoute ? $requestRoute : $_SERVER['REQUEST_URI'];
-
-
-    // $requestRoute = $_SERVER['REQUEST_URI'];
     $requestMethod = $_SERVER['REQUEST_METHOD'];
 
 
