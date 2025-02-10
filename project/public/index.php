@@ -15,11 +15,13 @@
   $dotenv = Dotenv::createImmutable(dirname(__DIR__));
   $dotenv->load();
   
+
+  echo 'hh';
   
   echo $_ENV['APP_NAME'];
   
 
-  dump(dirname(__DIR__).'/');
+  // dump(dirname(__DIR__).'/');
 
 
 
