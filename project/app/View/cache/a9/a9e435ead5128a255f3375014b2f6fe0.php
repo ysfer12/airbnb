@@ -847,13 +847,10 @@ class __TwigTemplate_102434cd7d2327fcd291b339d4a26b7d extends Template
                     <img src=\"https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg\" alt=\"PayPal\" class=\"h-6 w-auto\">
                 </div>
                 <div class=\"bg-white rounded-lg p-2 shadow-lg\">
-                    <img src=\"https://upload.wikimedia.org/wikipedia/commons/5/5e/Stripe_logo%2C_revised_2016.png\" alt=\"Stripe\" class=\"h-6 w-auto\">
+                    <img src=\"https://upload.wikimedia.org/wikipedia/commons/b/ba/Stripe_Logo%2C_revised_2016.svg\" alt=\"Stripe\" class=\"h-6 w-auto\">
                 </div>
                 <div class=\"bg-white rounded-lg p-2 shadow-lg\">
-                    <img src=\"https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_Pay_logo.svg\" alt=\"Apple Pay\" class=\"h-6 w-auto\">
-                </div>
-                <div class=\"bg-white rounded-lg p-2 shadow-lg\">
-                    <img src=\"https://upload.wikimedia.org/wikipedia/commons/a/a0/Google_Pay_Logo.svg\" alt=\"Google Pay\" class=\"h-6 w-auto\">
+                    <img src=\"https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg\" alt=\"Apple Pay\" class=\"h-6 w-auto\">
                 </div>
             </div>
 
@@ -1751,13 +1748,10 @@ class __TwigTemplate_102434cd7d2327fcd291b339d4a26b7d extends Template
                     <img src=\"https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg\" alt=\"PayPal\" class=\"h-6 w-auto\">
                 </div>
                 <div class=\"bg-white rounded-lg p-2 shadow-lg\">
-                    <img src=\"https://upload.wikimedia.org/wikipedia/commons/5/5e/Stripe_logo%2C_revised_2016.png\" alt=\"Stripe\" class=\"h-6 w-auto\">
+                    <img src=\"https://upload.wikimedia.org/wikipedia/commons/b/ba/Stripe_Logo%2C_revised_2016.svg\" alt=\"Stripe\" class=\"h-6 w-auto\">
                 </div>
                 <div class=\"bg-white rounded-lg p-2 shadow-lg\">
-                    <img src=\"https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_Pay_logo.svg\" alt=\"Apple Pay\" class=\"h-6 w-auto\">
-                </div>
-                <div class=\"bg-white rounded-lg p-2 shadow-lg\">
-                    <img src=\"https://upload.wikimedia.org/wikipedia/commons/a/a0/Google_Pay_Logo.svg\" alt=\"Google Pay\" class=\"h-6 w-auto\">
+                    <img src=\"https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg\" alt=\"Apple Pay\" class=\"h-6 w-auto\">
                 </div>
             </div>
 

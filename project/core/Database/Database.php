@@ -31,7 +31,7 @@ class Database
         }
 
         $servername = $_ENV['DB_HOST'];
-        $port = $_ENV['PORT'];
+        $port = $_ENV['DB_PORT'];
         $databasename = $_ENV['DB_NAME'];
         $username = $_ENV['DB_USER'];
         $password = $_ENV['DB_PASSWORD'];
@@ -50,7 +50,6 @@ class Database
             $conn = new PDO($conStr);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            echo "Connected successfully";
 
         } catch (PDOException $e) {
             echo "Connection failed: " . $e->getMessage();

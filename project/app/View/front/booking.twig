@@ -1,0 +1,122 @@
+{% extends "base.twig" %}
+
+{% block title %}Book Property{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="booking-form">
+        <h2 class="text-center mb-4">Book Your Stay</h2>
+        
+        <form id="bookingForm" method="POST">
+            <input type="hidden" name="traveler_id" value="{{ user_id }}">
+            <input type="hidden" name="property_id" value="{{ property_id }}">
+
+            <div class="form-group">
+                <label for="start_date">Check-in Date</label>
+                <input type="date" 
+                       id="start_date" 
+                       name="start_date" 
+                       class="form-control" 
+                       required 
+                       min="{{ "now"|date('Y-m-d') }}">
+            </div>
+
+            <div class="form-group">
+                <label for="end_date">Check-out Date</label>
+                <input type="date" 
+                       id="end_date" 
+                       name="end_date" 
+                       class="form-control" 
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label for="guest_count">Number of Guests</label>
+                <select id="guest_count" 
+                        name="guest_count" 
+                        class="form-control" 
+                        required>
+                    <option value="1">1 Guest</option>
+                    <option value="2" selected>2 Guests</option>
+                    <option value="3">3 Guests</option>
+                    <option value="4">4 Guests</option>
+                    <option value="5">5+ Guests</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="special_requests">Special Requests (Optional)</label>
+                <textarea 
+                    id="special_requests" 
+                    name="special_requests" 
+                    class="form-control" 
+                    rows="4" 
+                    placeholder="Any special requirements or notes"
+                ></textarea>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block">
+                    Proceed to Payment
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const startDateInput = document.getElementById('start_date');
+            const endDateInput = document.getElementById('end_date');
+
+            startDateInput.addEventListener('change', function() {
+                endDateInput.min = startDateInput.value;
+                
+                if (new Date(endDateInput.value) <= new Date(startDateInput.value)) {
+                    endDateInput.value = '';
+                }
+            });
+
+            document.getElementById('bookingForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const startDate = new Date(startDateInput.value);
+                const endDate = new Date(endDateInput.value);
+
+                if (startDate >= endDate) {
+                    alert('Check-out date must be after check-in date');
+                    return;
+                }
+
+                const formData = new FormData(this);
+                const jsonData = Object.fromEntries(formData.entries());
+
+                fetch('/bookings/create', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(jsonData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.booking_id) {
+                        if (data.payment_url) {
+                            window.location.href = data.payment_url;
+                        } else {
+                            alert('Booking successful!');
+                        }
+                    } else {
+                        alert(data.error || 'Booking failed');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while processing your booking. Please try again later.');
+                });
+            });
+        });
+    </script>
+{% endblock %}
