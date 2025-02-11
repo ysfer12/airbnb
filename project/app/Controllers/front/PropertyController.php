@@ -17,7 +17,14 @@ class PropertyController
   
 
   // display Latest 10:
-  
+  public function displayLatestTen()
+  {
+    $data = $this->PropertyModel->displayLatestTen();
+
+    dump($data);
+    
+  }
+
   // displayProperty:
 
   // creatProperty:

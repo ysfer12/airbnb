@@ -30,9 +30,11 @@ class Database
             return self::$pdoSinglton;
         }
 
+        dump($_ENV['DB_NAME']);
+
         $servername = $_ENV['DB_HOST'];
-        $port = $_ENV['PORT'];
-        $databasename = $_ENV['DB_NAME'];
+        $port = $_ENV['DB_PORT'];
+        $databasename = $_ENV['DB_NAME'];        
         $username = $_ENV['DB_USER'];
         $password = $_ENV['DB_PASSWORD'];
 
@@ -47,6 +49,7 @@ class Database
 
 
         try {
+
             $conn = new PDO($conStr);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
