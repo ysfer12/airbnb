@@ -11,21 +11,20 @@ use Core\View\View;
 class HomeControllers
 {
 
-
   // private $UserModels;
-
 
   // public function __construct()
   // {
   //   $this->UserModels = new UserModels();
   // }
 
+  
   public function index()
   {
     
-    
-    // view inside page :
 
+
+    // view inside page :
     $data = [
       'title' => 'MVC Home', 
       'last_name' => 'MylastName',
@@ -33,13 +32,7 @@ class HomeControllers
     ];
 
 
-    dump();
-
     view('front/home', $data);
-
-
- 
-
 
     exit;
   }
