@@ -13,14 +13,14 @@ class UserMapper
   public static function mapUser($data)
   {
     $user = new User();
-    $user->setId($data['id']);
-    $user->setName($data['name']);
-    $user->setEmail($data['email']);
-    $user->setPhone($data['phone']);
-    $user->setRole($data['role']);
-    $user->setIsActive($data['isActive']);
-    $user->setCreatedAt($data['createdAT']);
-    $user->setDeletedAt($data['deletedAt']);
+    $user->setId($data['id'] ?? null);
+    $user->setName($data['name'] ?? null);
+    $user->setEmail($data['email'] ?? null);
+    $user->setPhone($data['phone'] ?? null);
+    $user->setRole($data['role'] ?? null);
+    $user->setIsActive($data['isActive'] ?? null);
+    $user->setCreatedAt($data['createdAT'] ?? null);
+    $user->setDeletedAt($data['deletedAt'] ?? null);
 
     return $user;
   }

@@ -12,20 +12,20 @@ class BookingMapper
   public static function mapBooking($data)
   {
     $booking = new Booking();
-    $booking->setId($data['id']);
-    $booking->setStartDate($data['startDate']);
-    $booking->setEndDate($data['endDate']);
-    $booking->setGuestCount($data['guestCount']);
-    $booking->setTotalPrice($data['totalPrice']);
-    $booking->setStatus($data['status']);
+    $booking->setId($data['id'] ?? null);
+    $booking->setStartDate($data['startDate'] ?? null);
+    $booking->setEndDate($data['endDate'] ?? null);
+    $booking->setGuestCount($data['guestCount'] ?? null);
+    $booking->setTotalPrice($data['totalPrice'] ?? null);
+    $booking->setStatus($data['status'] ?? null);
     
 
 
     // call mapper property:
     $propretyData = [
-      'id'=> $data['id'],
-      'title'=> $data['title'],
-      'description'=> $data['description']
+      'id'=> $data['id'] ?? null,
+      'title'=> $data['title'] ?? null,
+      'description'=> $data['description'] ?? null
     ];
     
     $booking->setProperty(PropertyMapper::mapProperty($propretyData));
@@ -33,9 +33,9 @@ class BookingMapper
 
     // call mapper user:
     $UserData = [
-      'id'=> $data['id'],
-      'name'=> $data['name'],
-      'email'=> $data['email']
+      'id'=> $data['id'] ?? null,
+      'name'=> $data['name'] ?? null,
+      'email'=> $data['email'] ?? null
     ];
 
     $booking->setTraveler(UserMapper::mapUser($UserData));
