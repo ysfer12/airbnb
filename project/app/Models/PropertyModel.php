@@ -32,9 +32,12 @@ class PropertyModel extends BaseModel
 
     $data = $data->fetchAll();
 
-    dump($data);
+    // return $data;
 
-    return PropertyMapper::mapProperty($data);
+    // dump($data);
+
+    // return 
+    PropertyMapper::mapProperty($data);
 
   }
 

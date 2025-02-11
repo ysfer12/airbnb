@@ -5,14 +5,14 @@ namespace App\Entities;
 class User
 {
 
-  protected int $id;
-  protected string $name;
-  protected string $email;
-  protected string $phone;
-  protected string $role;
-  protected bool $isActive;
-  protected string $createdAt;
-  protected string $deletedAt;
+  protected $id;
+  protected $name;
+  protected $email;
+  protected $phone;
+  protected $role;
+  protected $isActive;
+  protected $createdAt;
+  protected $deletedAt;
 
   // Getters
 
@@ -59,45 +59,43 @@ class User
 
   // Setters
 
-  public function setId(int $id)
+  public function setId($id)
   {
     $this->id = $id;
   }
 
-  public function setName(string $name)
+  public function setName($name)
   {
     $this->name = $name;
   }
 
-  public function setEmail(string $email)
+  public function setEmail($email)
   {
     $this->email = $email;
   }
 
-  public function setPhone(string $phone)
+  public function setPhone($phone)
   {
     $this->phone = $phone;
   }
 
-  public function setRole(string $role)
+  public function setRole($role)
   {
     $this->role = $role;
   }
 
-  public function setIsActive(bool $isActive)
+  public function setIsActive($isActive)
   {
     $this->isActive = $isActive;
   }
 
-  public function setCreatedAt(string $createdAt)
+  public function setCreatedAt($createdAt)
   {
     $this->createdAt = $createdAt;
   }
 
-  public function setDeletedAt(string $deletedAt)
+  public function setDeletedAt($deletedAt)
   {
     $this->deletedAt = $deletedAt;
   }
-
-
 }

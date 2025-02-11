@@ -5,9 +5,9 @@ namespace App\Entities;
 class Category
 {
 
-  private int $id;
-  private string $name;
-  private string $description;
+  private $id;
+  private $name;
+  private $description;
 
 
   // Getters
@@ -15,8 +15,8 @@ class Category
   {
     return $this->id;
   }
-  
-  public function getName(): string
+
+  public function getName()
   {
     return $this->name;
   }
@@ -28,19 +28,18 @@ class Category
 
 
   // Setters
-  public function setId(int $id)
+  public function setId($id)
   {
     $this->id = $id;
   }
 
-  public function setName(string $name)
+  public function setName($name)
   {
     $this->name = $name;
-  }  
+  }
 
-  public function setDescription(string $description)
+  public function setDescription($description)
   {
     $this->description = $description;
   }
-
 }

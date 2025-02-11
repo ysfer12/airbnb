@@ -4,16 +4,15 @@ namespace App\Entities;
 
 class Property
 {
-
-  private int $id;
-  private string $title;
-  private string $description;
-  private float $price;
-  private array $photos; // array of photo URLS explod by ','.
-  private bool $isValidated;
-  private bool $isAvailable;
-  private User $owner; // Object from the User class
-  private Category $category; // Object from the Category class
+  private $id;
+  private $title;
+  private $description;
+  private $price;
+  private $photos; // array of photo URLS explod by ','.
+  private $isValidated;
+  private $isAvailable;
+  private $owner; // Object from the User class
+  private $category; // Object from the Category class
 
 
   // Getters
@@ -64,47 +63,47 @@ class Property
 
 
   // Setters
-  public function setId(int $id)
+  public function setId($id)
   {
     $this->id = $id;
   }
 
-  public function setTitle(string $title)
+  public function setTitle($title)
   {
     $this->title = $title;
   }
 
-  public function setDescription(string $description)
+  public function setDescription($description)
   {
     $this->description = $description;
   }
 
-  public function setPrice(float $price)
+  public function setPrice($price)
   {
     $this->price = $price;
   }
 
-  public function setPhotos(array $photos)
+  public function setPhotos($photos)
   {
     $this->photos = $photos;
   }
 
-  public function setIsValidated(bool $isValidated)
+  public function setIsValidated($isValidated)
   {
     $this->isValidated = $isValidated;
   }
 
-  public function setIsAvailable(bool $isAvailable)
+  public function setIsAvailable($isAvailable)
   {
     $this->isAvailable = $isAvailable;
   }
 
-  public function setOwner(User $owner)
+  public function setOwner($owner)
   {
     $this->owner = $owner;
   }
 
-  public function setCategory(Category $category)
+  public function setCategory($category)
   {
     $this->category = $category;
   }

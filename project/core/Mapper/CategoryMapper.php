@@ -12,9 +12,9 @@ class CategoryMapper
   public static function mapCategory($data)
   {
     $category = new Category();
-    $category->setId($data['id']);
-    $category->setName($data['name']);
-    $category->setDescription($data['description']);
+    $category->setId($data['id'] ?? null);
+    $category->setName($data['name'] ?? null);
+    $category->setDescription($data['description'] ?? null);
     
 
     return $category;

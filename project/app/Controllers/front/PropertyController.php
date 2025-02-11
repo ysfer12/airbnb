@@ -21,9 +21,13 @@ class PropertyController
   {
     $data = $this->PropertyModel->displayLatestTen();
 
-    dump($data);
+    // dump($data);
     
   }
+
+
+
+
 
   // displayProperty:
 

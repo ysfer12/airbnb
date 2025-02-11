@@ -5,11 +5,11 @@ namespace App\Entities;
 class Payment
 {
 
-  private int $id;
-  private float $amount;
-  private string $status;
-  private string $timeStamp;
-  private Booking $booking;
+  private $id;
+  private $amount;
+  private $status;
+  private $timeStamp;
+  private $booking;
 
 
   // getters:
@@ -40,27 +40,27 @@ class Payment
 
 
   // setters:
-  public function setId(int $id)
+  public function setId($id)
   {
     $this->id = $id;
   }
 
-  public function setAmount(string $amount)
+  public function setAmount($amount)
   {
     $this->amount = $amount;
   }
 
-  public function setStatus(string $status)
+  public function setStatus($status)
   {
     $this->status = $status;
   }
 
-  public function setTimeStamp(string $timeStamp)
+  public function setTimeStamp($timeStamp)
   {
     $this->timeStamp = $timeStamp;
   }
 
-  public function setBooking(Booking $booking)
+  public function setBooking($booking)
   {
     $this->booking = $booking;
   }
