@@ -21,6 +21,7 @@ class App
     $requestMethod = $_SERVER['REQUEST_METHOD'];
 
 
+
     Router::RouteHandlers($requestRoute, $requestMethod);
 
   }
