@@ -9,8 +9,6 @@ class Auth
 {
 
 
-
-
   public static function isLoggedIn()
   {
     Session::startSession();
