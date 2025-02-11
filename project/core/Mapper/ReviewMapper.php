@@ -12,16 +12,16 @@ class ReviewMapper
   public static function mapReview($data)
   {
     $review = new Review();
-    $review->setId($data['id']);
-    $review->setRating($data['rating']);
-    $review->setComment($data['comment']);
-    $review->setCreatedAt($data['createdAt']);
+    $review->setId($data['id'] ?? null);
+    $review->setRating($data['rating'] ?? null);
+    $review->setComment($data['comment'] ?? null);
+    $review->setCreatedAt($data['createdAt'] ?? null);
 
 
-    $review->setBooking($data['booking']);
+    $review->setBooking($data['booking'] ?? null);
     
 
-    $review->setTraveler($data['Traveler']);
+    $review->setTraveler($data['Traveler'] ?? null);
     
 
     return $review;

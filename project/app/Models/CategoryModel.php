@@ -7,7 +7,7 @@ use Core\Mapper\CategoryMapper;
 
 class CategoryModel extends BaseModel
 {
-  
+
 
 
 
