@@ -8,7 +8,7 @@ Router::get('', 'back\\HomeControllers@index');
 
 Router::get('/', 'front\\HomeControllers@index');
 
-Router::get('home', 'front\\HomeControllers@index');
+Router::get('', 'front\\HomeControllers@index');
 
 Router::get('contact', 'front\\HomeControllers@index2');
 

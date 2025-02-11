@@ -24,7 +24,7 @@ class Router
   public static function put($route, $action)
   {
     self::$routes['PUT'][$route] = $action;
-  }
+  }  
 
   public static function patch($route, $action)
   {
