@@ -18,6 +18,13 @@ Router::get('product/{id}', 'front\\HomeControllers@index');
 
 
 
+Router::get('home', 'front\\HomeControllers@index1');
+
+Router::get('home', 'front\\HomeControllers@index2');
+
+
+
+
 // --------------------
 
 // Router::post('login', 'front\\AuthControllers@login');

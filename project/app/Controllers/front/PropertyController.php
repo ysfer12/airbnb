@@ -16,6 +16,23 @@ class PropertyController
 
   
 
+  // display Latest 10:
+  
+  // displayProperty:
+
+  // creatProperty:
+
+  // updateProperty :
+
+  // deleteProperty :
+  
+  // getById :
+
+  // getByName :
+
+  // validateProperty :
+
+  // viewStatistiques :
 
   
 

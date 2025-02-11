@@ -50,7 +50,9 @@ class Database
             $conn = new PDO($conStr);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            echo "Connected successfully";
+            self::$pdoSinglton = $conn;
+            
+            return self::$pdoSinglton;
 
         } catch (PDOException $e) {
             echo "Connection failed: " . $e->getMessage();
