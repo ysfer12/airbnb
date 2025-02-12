@@ -121,12 +121,12 @@ class PropertyController
 
 
     // call validator:
-    $validator = new Validator($data);
+    $validatorAdd = new Validator($data);
 
 
 
-    if ($validator->isErrors()) {
-      Session::setSession('errorAdd', $validator->getErrors());
+    if ($validatorAdd->isErrors()) {
+      Session::setSession('errorAdd', $validatorAdd->getErrors());
 
 
       redirect('');
@@ -191,11 +191,11 @@ class PropertyController
 
     
     // call validator:
-    $validator = new Validator($data);
+    $validatorUpdate = new Validator($data);
 
 
-    if ($validator->isErrors()) {
-      Session::setSession('errorUpdate', $validator->getErrors());
+    if ($validatorUpdate->isErrors()) {
+      Session::setSession('errorUpdate', $validatorUpdate->getErrors());
 
 
       redirect('');
@@ -242,16 +242,49 @@ class PropertyController
     if (!$deleteProperty) {
 
       Session::setSession('errorDelete', 'property not deleted');
+      
       return;
     }
 
     dump('delete success');
 
     exit;
-
-
-
   }
+
+
+
+
+  // searchProperty
+  public function searchProperty()
+  {
+
+    header('Content-Type: application/json');
+
+    $json = file_get_contents("php://input");
+    $search = json_decode($json, true);
+
+
+    $search['search'] = 'tamaris';
+    
+
+    $validatorSearch = new Validator(['title' => $search['search']]);
+  
+    if (!$validatorSearch) {
+      echo json_encode(['success' => false, 'message' => 'data not valid']);      
+    }
+    
+
+    $searchProperty = $this->PropertyModel->searchProperty($search['search']);
+
+
+    // echo json_encode(['success' => true, 'data' => $searchProperty]);
+
+    echo json_encode(['data' => $searchProperty]);
+
+    exit;
+  }
+
+
 
   // getById :
 

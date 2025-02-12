@@ -35,5 +35,8 @@ Router::post('property/update', 'front\\PropertyController@updateProperty');
 Router::get('property/delete', 'front\\PropertyController@deleteProperty');
 
 
+Router::post('property/search', 'front\\PropertyController@searchProperty');
+
+Router::get('property/search', 'front\\PropertyController@searchProperty');
 
 
