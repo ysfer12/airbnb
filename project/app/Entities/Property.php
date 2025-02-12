@@ -9,10 +9,14 @@ class Property
   private $description;
   private $price;
   private $photos; // array of photo URLS explod by ','.
+  private $bedrooms;
+  private $bathrooms;
   private $isValidated;
   private $isAvailable;
+  private $rating;
   private $owner; // Object from the User class
   private $category; // Object from the Category class
+
 
 
   // Getters
@@ -41,6 +45,16 @@ class Property
     return $this->photos;
   }
 
+  public function getBedrooms()
+  {
+    return $this->bedrooms;
+  }
+
+  public function getBathrooms()
+  {
+    return $this->bathrooms;
+  }
+
   public function getIsValidated()
   {
     return $this->isValidated;
@@ -49,6 +63,11 @@ class Property
   public function getIsAvailable()
   {
     return $this->isAvailable;
+  }
+
+  public function getRating()
+  {
+    return $this->rating;
   }
 
   public function getOwner()
@@ -88,6 +107,16 @@ class Property
     $this->photos = $photos;
   }
 
+  public function setBedrooms($bedrooms)
+  {
+    $this->bedrooms = $bedrooms;
+  }
+
+  public function setBathrooms($bathrooms)
+  {
+    $this->bathrooms = $bathrooms;
+  }
+
   public function setIsValidated($isValidated)
   {
     $this->isValidated = $isValidated;
@@ -96,6 +125,11 @@ class Property
   public function setIsAvailable($isAvailable)
   {
     $this->isAvailable = $isAvailable;
+  }
+
+  public function setRating($rating)
+  {
+    $this->rating = $rating;
   }
 
   public function setOwner($owner)

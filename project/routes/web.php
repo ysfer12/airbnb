@@ -11,6 +11,9 @@ Router::get('/', 'front\\PropertyController@displayLatestTen');
 Router::get('home', 'front\\PropertyController@displayLatestTen');
 
 
+Router::get('proprety', 'front\\PropertyController@displayAll');
+
+
 
 
 

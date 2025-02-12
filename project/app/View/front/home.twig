@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>{{ title }}</title>
@@ -7,6 +7,19 @@
 <body>
     <h1>{{ title }}</h1>
     <p>{{ last_name }}</p>
+
+
+    {% for property in propertys %}
+        {{property.id}}
+        {{property.title}}
+
+    {% endfor %}
+
+    
+
+
+
+    
 </body>
 </html>
 

@@ -30,7 +30,6 @@ class Database
             return self::$pdoSinglton;
         }
 
-        dump($_ENV['DB_NAME']);
 
         $servername = $_ENV['DB_HOST'];
         $port = $_ENV['DB_PORT'];
@@ -47,7 +46,7 @@ class Database
             $password
         );
 
-
+        
         try {
 
             $conn = new PDO($conStr);
