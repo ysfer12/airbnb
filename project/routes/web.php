@@ -8,6 +8,10 @@ Router::get('', 'back\\HomeControllers@index');
 
 Router::get('/', 'front\\HomeControllers@index');
 
+Router::get('auth', 'front\\HomeControllers@auth');
+
+Router::get('addInformation', 'front\\HomeControllers@addInformation');
+
 Router::get('', 'front\\HomeControllers@index');
 
 Router::get('contact', 'front\\HomeControllers@index2');
