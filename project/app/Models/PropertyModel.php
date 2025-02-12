@@ -23,7 +23,7 @@ class PropertyModel extends BaseModel
                               properties.created_at,
                               properties.is_available,
                               properties.is_validated,	
-                              MAX(reviews.rating),
+                              MAX(reviews.rating) as rating,
                               users.id as owner_id,
                               users.name as owner_name,
                               users.email as owner_email,
@@ -41,14 +41,14 @@ class PropertyModel extends BaseModel
 
 
     $data = $stmt->fetchAll();
-    
+
 
     $Propertys = [];
     foreach ($data as $keyData => $valueData) {
-      
+
       $Propertys[] = PropertyMapper::mapProperty($valueData);
     }
-    
+
 
     return $Propertys;
   }
@@ -69,7 +69,7 @@ class PropertyModel extends BaseModel
                           properties.created_at,
                           properties.is_available,
                           properties.is_validated,	
-                          MAX(reviews.rating),
+                          MAX(reviews.rating) as rating,
                           users.id as owner_id,
                           users.name as owner_name,
                           users.email as owner_email,
@@ -85,25 +85,96 @@ class PropertyModel extends BaseModel
 
     $data = $stmt->fetchAll();
 
-    
+
+    // dump($data[1]);
+
     $Propertys = [];
     foreach ($data as $keyData => $valueData) {
-      
+
       $Propertys[] = PropertyMapper::mapProperty($valueData);
     }
-    
+
 
     return $Propertys;
-
   }
 
 
 
   // creatProperty:
+  public function creatProperty($data)
+  {
 
+
+
+    $query = "INSERT INTO properties (
+              title, description, price, photos, address, bedrooms, bathrooms, is_validated, 
+              is_available, created_at, owner_id, category_id, latitude, longitude, 
+              max_guests, amenities, house_rules, availability_dates, base_price, minimum_stay, 
+              maximum_stay, cancellation_policy, updated_at
+              ) VALUES (
+                  :title, :description, :price, :photos, :address, :bedrooms, :bathrooms, :is_validated, 
+                  :is_available, :created_at, :owner_id, :category_id, :latitude, :longitude, 
+                  :max_guests, :amenities, :house_rules, :availability_dates, :base_price, :minimum_stay, 
+                  :maximum_stay, :cancellation_policy, :updated_at
+              )";
+
+
+
+    $stmt = $this->query($query, $data);
+    // return $stmt->lastinsertid();
+
+  }
   // updateProperty :
+  public function updateProperty($data)
+  {
+
+    $query = "UPDATE properties SET 
+              title = :title, 
+              description = :description, 
+              price = :price, 
+              photos = :photos, 
+              address = :address, 
+              bedrooms = :bedrooms, 
+              bathrooms = :bathrooms, 
+              is_validated = :is_validated, 
+              is_available = :is_available, 
+              created_at = :created_at, 
+              owner_id = :owner_id, 
+              category_id = :category_id, 
+              latitude = :latitude, 
+              longitude = :longitude, 
+              max_guests = :max_guests, 
+              amenities = :amenities, 
+              house_rules = :house_rules, 
+              availability_dates = :availability_dates, 
+              base_price = :base_price, 
+              minimum_stay = :minimum_stay, 
+              maximum_stay = :maximum_stay, 
+              cancellation_policy = :cancellation_policy, 
+              updated_at = :updated_at 
+          WHERE id = :id";
+  
+
+    $stmt = $this->query($query, $data);
+
+    return $stmt->rowCount() > 0;
+
+  }
+
 
   // deleteProperty :
+  public function deleteProperty($id)
+  {
+
+    $query = "DELETE FROM properties WHERE id = :id";
+
+
+    $stmt = $this->query($query, ['id' => $id]);
+
+    return $stmt->rowCount() > 0;
+
+  }
+
 
   // getById :
 

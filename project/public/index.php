@@ -1,7 +1,7 @@
 <?php 
 
 
-  echo 'start -- ';
+  // echo 'start -- ';
 
   
   
@@ -17,7 +17,7 @@
   
 
   
-  echo $_ENV['APP_NAME'];
+  // echo $_ENV['APP_NAME'];
   
 
 

@@ -19,6 +19,7 @@ class PropertyMapper
     $property->setTitle($data['title'] ?? null);
     $property->setDescription($data['description'] ?? null);
     $property->setPrice($data['price'] ?? null);
+    $property->setAddress($data['address'] ?? null);
     $property->setPhotos($data['photos'] ?? null);
     $property->setBedrooms($data['bedrooms'] ?? null);
     $property->setBathrooms($data['bathrooms'] ?? null);

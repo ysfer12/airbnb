@@ -8,6 +8,7 @@ class Property
   private $title;
   private $description;
   private $price;
+  private $address;
   private $photos; // array of photo URLS explod by ','.
   private $bedrooms;
   private $bathrooms;
@@ -38,6 +39,11 @@ class Property
   public function getPrice()
   {
     return $this->price;
+  }
+
+  public function getAddress()
+  {
+    return $this->address;
   }
 
   public function getPhotos()
@@ -100,6 +106,11 @@ class Property
   public function setPrice($price)
   {
     $this->price = $price;
+  }
+
+  public function setAddress($address)
+  {
+    $this->address = $address;
   }
 
   public function setPhotos($photos)
