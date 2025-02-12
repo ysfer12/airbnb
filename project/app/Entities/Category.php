@@ -9,7 +9,8 @@ class Category
   private string $name;
   private string $description;
 
-  
+
+  // Getters
   public function getId()
   {
     return $this->id;
@@ -25,7 +26,8 @@ class Category
     return $this->description;
   }
 
-  
+
+  // Setters
   public function setId(int $id)
   {
     $this->id = $id;

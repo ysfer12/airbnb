@@ -12,29 +12,48 @@ use PDOException;
 
 class Database
 {
-    private static $conn;
+
+    private static $pdoSinglton;
+
 
     public static function getConnection()
     {
-        if (self::$conn === null) {
-            $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__ . '/../../');
-            $dotenv->load();
 
-            $host = $_ENV['DB_HOST'];
-            $port = $_ENV['DB_PORT'];
-            $dbname = $_ENV['DB_NAME'];
-            $user = $_ENV['DB_USER'];
-            $password = $_ENV['DB_PASSWORD'];
 
-            $dsn = "pgsql:host=$host;port=$port;dbname=$dbname";
-            try {
-                self::$conn = new PDO($dsn, $user, $password);
-                self::$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            } catch (PDOException $e) {
-                die('Connection failed: ' . $e->getMessage());
-            }
+
+        // $dotenv = Dotenv::createImmutable(dirname(__DIR__));
+        // $dotenv->load();
+
+
+
+        if (self::$pdoSinglton != null) {
+            return self::$pdoSinglton;
         }
-        return self::$conn;
+
+        $servername = $_ENV['DB_HOST'];
+        $port = $_ENV['PORT'];
+        $databasename = $_ENV['DB_NAME'];
+        $username = $_ENV['DB_USER'];
+        $password = $_ENV['DB_PASSWORD'];
+
+        $conStr = sprintf(
+            "pgsql:host=%s;port=%d;dbname=%s;user=%s;password=%s",
+            $servername,
+            $port,
+            $databasename,
+            $username,
+            $password
+        );
+
+
+        try {
+            $conn = new PDO($conStr);
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            echo "Connected successfully";
+
+        } catch (PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
     }
 }
-

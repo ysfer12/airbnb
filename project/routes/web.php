@@ -17,20 +17,6 @@ Router::get('home/{id}', 'front\\HomeControllers@index');
 Router::get('product/{id}', 'front\\HomeControllers@index');
 
 
-Router::get('category/index', 'back\\DashboardCategoryController@index');
-
-
-
-
-
-
-
-
-// back/admin/category/index ;
-
-Router::get('dashboard/category', 'back\\DashboardController@index');
-
-
 
 // --------------------
 
