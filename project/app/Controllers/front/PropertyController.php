@@ -224,36 +224,25 @@ class PropertyController
     $dataStatic = [];
 
     $getTotalProperties = $this->propertyModel->getTotalProperties();
-
     $dataStatic['totalProperties'] = $getTotalProperties;
-    // dump($getTotalProperties);
 
 
     $getAvailabilityStats = $this->propertyModel->getAvailabilityStats();
-
-    // dump($getAvailabilityStats);
     $dataStatic['AvailabilityStats'] = $getAvailabilityStats;
 
 
-
     $getAveragePrice = $this->propertyModel->getAveragePrice();
-
     $dataStatic['AveragePrice'] = $getAveragePrice;
-
-    // dump($getAveragePrice);
-
 
 
     $getPropertiesByCategory = $this->propertyModel->getPropertiesByCategory();
-
     $dataStatic['PropertiesByCategory'] = $getPropertiesByCategory;
-    // dump($getPropertiesByCategory);
 
 
     $getPropertiesPerOwner = $this->propertyModel->getPropertiesPerOwner();
-
     $dataStatic['PropertiesPerOwner'] = $getPropertiesPerOwner;
-    // dump($getPropertiesPerOwner);
+    
+
     
     dump($dataStatic);
 
