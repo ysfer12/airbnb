@@ -40,6 +40,6 @@ Router::post('property/search', 'front\\PropertyController@searchProperty');
 
 
 
-Router::post('property/id', 'front\\PropertyController@getPropertyById');
+Router::get('property/id', 'front\\PropertyController@getPropertyById');
 
 

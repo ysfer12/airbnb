@@ -7,6 +7,7 @@ class Rules
 {
 
   public static $rules = [
+    'id' => 'required|numeric',
     'username' => 'required|min:6|max:20',
     'lastname' => 'required|min:6|max:20',
     'email'    => 'required|email',
