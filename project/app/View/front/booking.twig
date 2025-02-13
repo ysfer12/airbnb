@@ -1,122 +1,186 @@
-{% extends "base.twig" %}
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-6">Réserver</h1>
 
-{% block title %}Book Property{% endblock %}
-
-{% block body %}
-<div class="container mt-5">
-    <div class="booking-form">
-        <h2 class="text-center mb-4">Book Your Stay</h2>
+    <form id="bookingForm" class="max-w-2xl bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <input type="hidden" name="property_id" value="{{ property.id }}">
+        <input type="hidden" name="traveler_id" value="{{ user.id }}">
         
-        <form id="bookingForm" method="POST">
-            <input type="hidden" name="traveler_id" value="{{ user_id }}">
-            <input type="hidden" name="property_id" value="{{ property_id }}">
-
-            <div class="form-group">
-                <label for="start_date">Check-in Date</label>
-                <input type="date" 
-                       id="start_date" 
-                       name="start_date" 
-                       class="form-control" 
-                       required 
-                       min="{{ "now"|date('Y-m-d') }}">
+        <div class="mb-6">
+            <h2 class="text-xl font-semibold mb-4">Détails de la réservation</h2>
+            
+            <div class="grid grid-cols-2 gap-4 mb-4">
+                <div>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="start_date">
+                        Date d'arrivée
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                           type="date" 
+                           id="start_date" 
+                           name="start_date" 
+                           required>
+                </div>
+                <div>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="end_date">
+                        Date de départ
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                           type="date" 
+                           id="end_date" 
+                           name="end_date" 
+                           required>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="end_date">Check-out Date</label>
-                <input type="date" 
-                       id="end_date" 
-                       name="end_date" 
-                       class="form-control" 
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="guest_count">
+                    Nombre de voyageurs
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                       type="number" 
+                       id="guest_count" 
+                       name="guest_count" 
+                       min="1" 
+                       max="{{ property.max_guests }}"
                        required>
             </div>
 
-            <div class="form-group">
-                <label for="guest_count">Number of Guests</label>
-                <select id="guest_count" 
-                        name="guest_count" 
-                        class="form-control" 
-                        required>
-                    <option value="1">1 Guest</option>
-                    <option value="2" selected>2 Guests</option>
-                    <option value="3">3 Guests</option>
-                    <option value="4">4 Guests</option>
-                    <option value="5">5+ Guests</option>
-                </select>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="special_requests">
+                    Demandes spéciales
+                </label>
+                <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                          id="special_requests" 
+                          name="special_requests" 
+                          rows="3"></textarea>
+            </div>
+        </div>
+
+        <div class="mb-6">
+            <h2 class="text-xl font-semibold mb-4">Paiement</h2>
+            
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2">
+                    Méthode de paiement
+                </label>
+                <div class="mt-2 space-y-2">
+                    <label class="inline-flex items-center">
+                        <input type="radio" 
+                               name="payment_method" 
+                               value="stripe" 
+                               checked 
+                               class="form-radio">
+                        <span class="ml-2">Carte bancaire</span>
+                    </label>
+                    <label class="inline-flex items-center ml-6">
+                        <input type="radio" 
+                               name="payment_method" 
+                               value="paypal" 
+                               class="form-radio">
+                        <span class="ml-2">PayPal</span>
+                    </label>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="special_requests">Special Requests (Optional)</label>
-                <textarea 
-                    id="special_requests" 
-                    name="special_requests" 
-                    class="form-control" 
-                    rows="4" 
-                    placeholder="Any special requirements or notes"
-                ></textarea>
+            <div id="stripe-payment-element" class="mb-4">
+                <!-- Stripe Elements sera injecté ici -->
             </div>
+        </div>
 
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block">
-                    Proceed to Payment
-                </button>
+        <div class="bg-gray-50 p-4 rounded-lg mb-6">
+            <h3 class="text-lg font-semibold mb-2">Résumé</h3>
+            <div class="space-y-2">
+                <div class="flex justify-between">
+                    <span>Prix par nuit</span>
+                    <span>{{ property.price }}€</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>Nombre de nuits</span>
+                    <span id="nights-count">-</span>
+                </div>
+                <div class="flex justify-between font-bold">
+                    <span>Total</span>
+                    <span id="total-price">-</span>
+                </div>
             </div>
-        </form>
-    </div>
+        </div>
+
+        <div class="flex items-center justify-between">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    type="submit">
+                Réserver
+            </button>
+        </div>
+    </form>
 </div>
-{% endblock %}
 
 {% block javascripts %}
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const startDateInput = document.getElementById('start_date');
-            const endDateInput = document.getElementById('end_date');
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialisation de Stripe
+    const stripe = Stripe('{{ stripe_public_key }}');
+    const elements = stripe.elements();
+    const paymentElement = elements.create('card');
+    paymentElement.mount('#stripe-payment-element');
 
-            startDateInput.addEventListener('change', function() {
-                endDateInput.min = startDateInput.value;
+    // Calcul du prix
+    function updatePrice() {
+        const startDate = new Date(document.getElementById('start_date').value);
+        const endDate = new Date(document.getElementById('end_date').value);
+        
+        if (startDate && endDate && endDate > startDate) {
+            const nights = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24));
+            const total = nights * {{ property.price }};
+            
+            document.getElementById('nights-count').textContent = nights;
+            document.getElementById('total-price').textContent = total + '€';
+        }
+    }
+
+    document.getElementById('start_date').addEventListener('change', updatePrice);
+    document.getElementById('end_date').addEventListener('change', updatePrice);
+
+    // Soumission du formulaire
+    document.getElementById('bookingForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const form = this;
+        const submitButton = form.querySelector('button[type="submit"]');
+        submitButton.disabled = true;
+        
+        try {
+            if (form.payment_method.value === 'stripe') {
+                const {paymentMethod, error} = await stripe.createPaymentMethod('card');
                 
-                if (new Date(endDateInput.value) <= new Date(startDateInput.value)) {
-                    endDateInput.value = '';
+                if (error) {
+                    throw new Error(error.message);
                 }
-            });
-
-            document.getElementById('bookingForm').addEventListener('submit', function(e) {
-                e.preventDefault();
                 
-                const startDate = new Date(startDateInput.value);
-                const endDate = new Date(endDateInput.value);
-
-                if (startDate >= endDate) {
-                    alert('Check-out date must be after check-in date');
-                    return;
-                }
-
-                const formData = new FormData(this);
-                const jsonData = Object.fromEntries(formData.entries());
-
-                fetch('/bookings/create', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(jsonData)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.booking_id) {
-                        if (data.payment_url) {
-                            window.location.href = data.payment_url;
-                        } else {
-                            alert('Booking successful!');
-                        }
-                    } else {
-                        alert(data.error || 'Booking failed');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('An error occurred while processing your booking. Please try again later.');
-                });
+                form.payment_data = {payment_method_id: paymentMethod.id};
+            }
+            
+            const response = await fetch('/booking/create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(Object.fromEntries(new FormData(form)))
             });
-        });
-    </script>
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                window.location.href = result.redirect;
+            } else {
+                throw new Error(result.error);
+            }
+        } catch (error) {
+            alert('Erreur: ' + error.message);
+            submitButton.disabled = false;
+        }
+    });
+});
+</script>
+{% endblock %}
 {% endblock %}

@@ -31,6 +31,7 @@ class ComposerStaticInitc037a14657adfd861c3e2207a6838b50
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Ctype\\' => 23,
             'Symfony\\Component\\VarDumper\\' => 28,
+            'Stripe\\' => 7,
         ),
         'R' => 
         array (
@@ -40,6 +41,7 @@ class ComposerStaticInitc037a14657adfd861c3e2207a6838b50
         array (
             'Pub\\' => 4,
             'PhpOption\\' => 10,
+            'PHPMailer\\PHPMailer\\' => 20,
         ),
         'G' => 
         array (
@@ -84,6 +86,10 @@ class ComposerStaticInitc037a14657adfd861c3e2207a6838b50
         array (
             0 => __DIR__ . '/..' . '/symfony/var-dumper',
         ),
+        'Stripe\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/stripe/stripe-php/lib',
+        ),
         'Router\\' => 
         array (
             0 => __DIR__ . '/../..' . '/router',
@@ -95,6 +101,10 @@ class ComposerStaticInitc037a14657adfd861c3e2207a6838b50
         'PhpOption\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
         'GrahamCampbell\\ResultType\\' => 
         array (

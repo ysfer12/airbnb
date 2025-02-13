@@ -1,10 +1,5 @@
 <?php
-
-
-
 namespace Core\Database;
-
-
 use  Dotenv\Dotenv;
 use PDO;
 use PDOException;
@@ -18,15 +13,9 @@ class Database
 
     public static function getConnection()
     {
-
-
-
         // $dotenv = Dotenv::createImmutable(dirname(__DIR__));
         // $dotenv->load();
-
-
-
-        if (self::$pdoSinglton != null) {
+       if (self::$pdoSinglton != null) {
             return self::$pdoSinglton;
         }
 

@@ -16,3 +16,5 @@ Router::get('home/{id}', 'front\\HomeControllers@index');
 
 Router::get('product/{id}', 'front\\HomeControllers@index');
 
+
+

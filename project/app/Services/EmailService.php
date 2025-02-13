@@ -3,57 +3,72 @@ namespace App\Services;
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use App\Entities\Booking;
+use App\Entities\User;
 
-class EmailService {
-    private $mailer;
-
-    public function __construct() {
+class EmailService 
+{
+    private PHPMailer $mailer;
+    
+    public function __construct() 
+    {
         $this->mailer = new PHPMailer(true);
         $this->configureMailer();
     }
 
-    private function configureMailer() {
+    private function configureMailer(): void 
+    {
         $this->mailer->isSMTP();
-        $this->mailer->Host = $_ENV['SMTP_HOST'];
+        $this->mailer->Host = 'smtp.gmail.com';
         $this->mailer->SMTPAuth = true;
-        $this->mailer->Username = $_ENV['SMTP_USERNAME'];
-        $this->mailer->Password = $_ENV['SMTP_PASSWORD'];
+        $this->mailer->Username = $_ENV['GMAIL_USER'];
+        $this->mailer->Password = $_ENV['GMAIL_APP_PASSWORD'];
         $this->mailer->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $this->mailer->Port = $_ENV['SMTP_PORT'];
+        $this->mailer->Port = 587;
+        $this->mailer->CharSet = 'UTF-8';
     }
 
-    public function sendBookingConfirmation($bookingId) {
+    public function sendBookingConfirmation(Booking $booking, User $user): bool 
+    {
         try {
-            // Fetch booking details 
-            $bookingDetails = $this->getBookingDetails($bookingId);
-
-            $this->mailer->setFrom('bookings@yoursite.com', 'Booking Confirmation');
-            $this->mailer->addAddress($bookingDetails['email']);
-            $this->mailer->isHTML(true);
-            $this->mailer->Subject = 'Booking Confirmation';
+            $this->mailer->setFrom($_ENV['GMAIL_USER'], 'Votre Plateforme');
+            $this->mailer->addAddress($user->getEmail());
+            $this->mailer->Subject = 'Confirmation de réservation #' . $booking->getId();
             
-            $this->mailer->Body = $this->generateEmailBody($bookingDetails);
-
-            $this->mailer->send();
-            return true;
+            $html = $this->generateBookingContract($booking);
+            $this->mailer->isHTML(true);
+            $this->mailer->Body = $html;
+            
+            return $this->mailer->send();
         } catch (Exception $e) {
-            error_log("Email send error: " . $this->mailer->ErrorInfo);
-            return false;
+            throw new Exception("Erreur d'envoi d'email: " . $e->getMessage());
         }
     }
 
-    private function getBookingDetails($bookingId) {
-        // TODO: Implement actual database retrieval of booking details
-        return [
-            'email' => 'user@example.com',
-            'booking_id' => $bookingId,
-        ];
-    }
-
-    private function generateEmailBody($bookingDetails) {
+    private function generateBookingContract(Booking $booking): string 
+    {
         return "
-            <h1>Booking Confirmation</h1>
-            <p>Your booking #" . $bookingDetails['booking_id'] . " is confirmed!</p>
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset='UTF-8'>
+                <title>Confirmation de Réservation</title>
+            </head>
+            <body>
+                <h1>Confirmation de Réservation</h1>
+                <div style='margin: 20px 0;'>
+                    <p><strong>Numéro de réservation:</strong> {$booking->getId()}</p>
+                    <p><strong>Dates du séjour:</strong> du {$booking->getStartDate()} au {$booking->getEndDate()}</p>
+                    <p><strong>Nombre de voyageurs:</strong> {$booking->getGuestCount()}</p>
+                    <p><strong>Montant total:</strong> {$booking->getTotalPrice()}€</p>
+                    " . ($booking->getSpecialRequests() ? "<p><strong>Demandes spéciales:</strong> {$booking->getSpecialRequests()}</p>" : "") . "
+                </div>
+                <div style='margin-top: 30px;'>
+                    <p>Pour toute question, n'hésitez pas à nous contacter.</p>
+                    <p>Merci de votre confiance !</p>
+                </div>
+            </body>
+            </html>
         ";
     }
 }

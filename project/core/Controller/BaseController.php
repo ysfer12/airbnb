@@ -7,9 +7,10 @@ namespace Core\Controller;
 
 class BaseController
 {
-
-
-
+  public function __construct()
+  {
+      // Initialisation de base pour tous les contrôleurs
+  }
   protected function jsonResponse($data, $statusCode = 200)
   {
 

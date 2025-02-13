@@ -30,6 +30,7 @@ class HomeControllers
       'last_name' => 'MylastName',
       'arr' => [1, 2, 3, 4]
     ];
+    
     view('front/home', $data);
 
     exit;
