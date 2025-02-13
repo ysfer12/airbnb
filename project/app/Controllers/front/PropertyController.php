@@ -264,7 +264,7 @@ class PropertyController
     $search = json_decode($json, true);
 
 
-    $search['search'] = 'tamaris';
+    $search['search'] = 'Luxury';
     
 
     $validatorSearch = new Validator(['title' => $search['search']]);
@@ -276,10 +276,10 @@ class PropertyController
 
     $searchProperty = $this->PropertyModel->searchProperty($search['search']);
 
+    // dump($searchProperty);
 
-    // echo json_encode(['success' => true, 'data' => $searchProperty]);
+    echo json_encode(['success' => true, 'data' => $searchProperty]);
 
-    echo json_encode(['data' => $searchProperty]);
 
     exit;
   }
@@ -287,6 +287,7 @@ class PropertyController
 
 
   // getById :
+
 
   // getByName :
 

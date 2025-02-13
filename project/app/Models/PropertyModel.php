@@ -86,7 +86,6 @@ class PropertyModel extends BaseModel
     $data = $stmt->fetchAll();
 
 
-    // dump($data[1]);
 
     $Propertys = [];
     foreach ($data as $keyData => $valueData) {
@@ -168,8 +167,8 @@ class PropertyModel extends BaseModel
   }
 
 
-  // searchProperty
 
+  // searchProperty
   public function searchProperty($search)
   {
 
@@ -206,24 +205,24 @@ class PropertyModel extends BaseModel
 
     $stmt = $this->query($query, ['search' => "%$search%"]);
 
-    return $stmt->fetchAll();
 
-    // $data = $stmt->fetchAll();
+    $data = $stmt->fetchAll();
 
-    // $Propertys = [];
-    // foreach ($data as $keyData => $valueData) {
+    $Propertys = [];
+    foreach ($data as $keyData => $valueData) {
 
-    //   $Propertys[] = PropertyMapper::mapProperty($valueData);
-    // }
+      $Propertys[] = PropertyMapper::mapProperty($valueData);
+    }
 
 
-    // return $Propertys;
+    return $Propertys;
   }
 
 
 
-
   // getById :
+
+
 
   // getByName :
 
