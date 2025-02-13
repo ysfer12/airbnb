@@ -264,7 +264,7 @@ class PropertyModel extends BaseModel
 
 
     $stmt = $this->query($query, ['id' => $id]);
-    
+
     $data =  $stmt->fetch();
 
 
@@ -273,16 +273,65 @@ class PropertyModel extends BaseModel
     }
 
     return PropertyMapper::mapProperty($data);
-
   }
 
 
 
 
+  // viewStatistiques :
+  public function getTotalProperties()
+  {
+    $query = "SELECT COUNT(*) AS total_properties FROM properties";
+    $stmt = $this->query($query);
+    return $stmt->fetch();
+  }
+
+
+
+  public function getAvailabilityStats()
+  {
+    $query = "SELECT COUNT(*) AS available_properties 
+              FROM properties 
+              WHERE is_available = true";
+    $stmt = $this->query($query);
+    return $stmt->fetchAll();
+  }
+
+
+  public function getAveragePrice()
+  {
+    $query = "SELECT ROUND(AVG(price), 2) AS avg_price FROM properties";
+    $stmt = $this->query($query);
+    return $stmt->fetch();
+  }
+
+
+
+  public function getPropertiesByCategory()
+  {
+    $query = "SELECT categories.name, COUNT(properties.id) AS total_properties
+              FROM properties
+              LEFT JOIN categories ON categories.id = properties.category_id
+              GROUP BY categories.name";
+
+    $stmt = $this->query($query);
+    return $stmt->fetchAll();
+  }
+
+
+
+  public function getPropertiesPerOwner()
+  {
+    $query = "SELECT users.name, COUNT(properties.id) AS total_properties
+              FROM properties
+              LEFT JOIN users ON users.id = properties.owner_id
+              GROUP BY users.name";
+    $stmt = $this->query($query);
+    return $stmt->fetchAll();
+  }
+
   // validateProperty :
 
-
-  // viewStatistiques :
 
 
 
