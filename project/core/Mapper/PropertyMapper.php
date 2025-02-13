@@ -11,38 +11,42 @@ class PropertyMapper
   
   public static function mapProperty($data)
   {
-    dump($data);
+
 
     $property = new Property();
+
     $property->setId($data['id'] ?? null);
-    $property->setTitle($data['Title'] ?? null);
-    $property->setDescription($data['Description'] ?? null);
-    $property->setPrice($data['Price'] ?? null);
-    $property->setPhotos($data['Photos'] ?? null);
-    $property->setIsValidated($data['IsValidated'] ?? null);
-    $property->setIsAvailable($data['IsAvailable'] ?? null);
+    $property->setTitle($data['title'] ?? null);
+    $property->setDescription($data['description'] ?? null);
+    $property->setPrice($data['price'] ?? null);
+    $property->setAddress($data['address'] ?? null);
+    $property->setPhotos($data['photos'] ?? null);
+    $property->setBedrooms($data['bedrooms'] ?? null);
+    $property->setBathrooms($data['bathrooms'] ?? null);
+    $property->setIsValidated($data['is_validated'] ?? null);
+    $property->setIsAvailable($data['is_available'] ?? null);
+    $property->setRating($data['rating'] ?? null);
 
 
     // call mapper user:
-    $UserData = [
-      'id'=> $data['id'] ?? null,
-      'name'=> $data['name'] ?? null,
-      'email'=> $data['email'] ?? null
+    $ownerData = [
+      'id'=> $data['owner_id'] ?? null,
+      'name'=> $data['owner_name'] ?? null,
+      'email'=> $data['owner_email'] ?? null
     ];
 
-    $property->setOwner(UserMapper::mapUser($UserData));
+    $property->setOwner(UserMapper::mapUser($ownerData));
     
 
 
     // call mapper category:
     $CategoryData = [
-      'id'=> $data['id'] ?? null,
-      'name'=> $data['name'] ?? null,
-      'description'=> $data['description'] ?? null
+      'id'=> $data['category_id'] ?? null,
+      'name'=> $data['category_name'] ?? null,
+      'description'=> $data['category_description'] ?? null
     ];
-
+  
     $property->setCategory(CategoryMapper::mapCategory($CategoryData));
-
 
 
 

@@ -21,9 +21,12 @@ class BaseModel
   public function query($sql, $params = [])
   {
     $stmt = $this->conn->prepare($sql);
-    
+
+    // dump($params[0]);
+
     $stmt->execute($params);
     return $stmt;
   }
+
 
 }
