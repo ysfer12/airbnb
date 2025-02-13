@@ -8,9 +8,14 @@ Router::get('', 'back\\HomeControllers@index');
 
 Router::get('/', 'front\\HomeControllers@index');
 
-Router::get('auth', 'front\\HomeControllers@auth');
+Router::get('auth', 'front\\AuthController@auth');
 
-Router::get('addInformation', 'front\\HomeControllers@addInformation');
+Router::get('addInformation', 'front\\AuthController@addInformation');
+
+
+Router::get('register', 'front\\AuthController@addInformation');
+
+Router::post('register', 'front\\AuthController@addUser');
 
 Router::get('', 'front\\HomeControllers@index');
 
