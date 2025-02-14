@@ -203,8 +203,6 @@ class PropertyModel extends BaseModel
 
     $stmt = $this->query($query, ['search' => "%$search%"]);
 
-    $stmt = $this->query($query, ['search' => "%$search%"]);
-
 
     $data = $stmt->fetchAll();
 
@@ -220,15 +218,120 @@ class PropertyModel extends BaseModel
 
 
 
-  // getById :
+  // getPropertyById :
+  public function getPropertyById($id)
+  {
+    $query = "SELECT 
+                  properties.id, 
+                  properties.title, 
+                  properties.description, 
+                  properties.price, 
+                  properties.photos,
+                  properties.address, 
+                  properties.bedrooms, 
+                  properties.bathrooms,
+                  properties.is_validated, 
+                  properties.is_available, 
+                  properties.created_at, 
+                  properties.owner_id, 
+                  properties.category_id, 
+                  properties.latitude, 
+                  properties.longitude, 
+                  properties.max_guests, 
+                  properties.amenities, 
+                  properties.house_rules, 
+                  properties.availability_dates, 
+                  properties.base_price, 
+                  properties.minimum_stay, 
+                  properties.maximum_stay, 
+                  properties.cancellation_policy, 
+                  properties.updated_at,
+                  MAX(reviews.rating) as rating,
+                  users.id as owner_id,
+                  users.name as owner_name,
+                  users.email as owner_email,
+                  categories.id as category_id,
+                  categories.name as category_name
+              FROM properties
+                  LEFT JOIN users ON users.id = properties.owner_id
+                  LEFT JOIN categories ON categories.id = properties.category_id
+                  LEFT JOIN bookings ON bookings.property_id = properties.id
+                  LEFT JOIN reviews ON reviews.booking_id = bookings.id
+              WHERE properties.id = :id
+              GROUP BY 
+                  properties.id, properties.title, users.name, users.id, categories.id";
 
 
 
-  // getByName :
+    $stmt = $this->query($query, ['id' => $id]);
+
+    $data =  $stmt->fetch();
+
+
+    if (!$data) {
+      return;
+    }
+
+    return PropertyMapper::mapProperty($data);
+  }
+
+
+
+
+  // viewStatistiques :
+  public function getTotalProperties()
+  {
+    $query = "SELECT COUNT(*) AS total_properties FROM properties";
+    $stmt = $this->query($query);
+    return $stmt->fetch();
+  }
+
+
+
+  public function getAvailabilityStats()
+  {
+    $query = "SELECT COUNT(*) AS available_properties 
+              FROM properties 
+              WHERE is_available = true";
+    $stmt = $this->query($query);
+    return $stmt->fetchAll();
+  }
+
+
+  public function getAveragePrice()
+  {
+    $query = "SELECT ROUND(AVG(price), 2) AS avg_price FROM properties";
+    $stmt = $this->query($query);
+    return $stmt->fetch();
+  }
+
+
+
+  public function getPropertiesByCategory()
+  {
+    $query = "SELECT categories.name, COUNT(properties.id) AS total_properties
+              FROM properties
+              LEFT JOIN categories ON categories.id = properties.category_id
+              GROUP BY categories.name";
+
+    $stmt = $this->query($query);
+    return $stmt->fetchAll();
+  }
+
+
+
+  public function getPropertiesPerOwner()
+  {
+    $query = "SELECT users.name, COUNT(properties.id) AS total_properties
+              FROM properties
+              LEFT JOIN users ON users.id = properties.owner_id
+              GROUP BY users.name";
+    $stmt = $this->query($query);
+    return $stmt->fetchAll();
+  }
 
   // validateProperty :
 
-  // viewStatistiques :
 
 
 
