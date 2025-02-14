@@ -161,8 +161,13 @@ class PropertyModel extends BaseModel
   // deleteProperty :
   public function deleteProperty($id)
   {
+    $this->query("ALTER TABLE properties DISABLE TRIGGER ALL");
+
     $query = "DELETE FROM properties WHERE id = :id";
     $stmt = $this->query($query, ['id' => $id]);
+
+    $this->query("ALTER TABLE properties ENABLE TRIGGER ALL");
+
     return $stmt->rowCount() > 0;
   }
 
