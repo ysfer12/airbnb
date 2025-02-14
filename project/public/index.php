@@ -2,6 +2,7 @@
 
 
   // echo 'start -- ';
+  // echo 'start -- ';
 
   
   
@@ -12,12 +13,14 @@
 
   
   $dotenv = Dotenv::createImmutable(dirname(__DIR__));  
+  $dotenv = Dotenv::createImmutable(dirname(__DIR__));  
   $dotenv->load();
   
 
   
 
 
+  // echo $_ENV['APP_NAME'];
   // echo $_ENV['APP_NAME'];
   
 

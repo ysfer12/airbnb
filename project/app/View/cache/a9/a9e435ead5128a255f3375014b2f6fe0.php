@@ -186,7 +186,6 @@ class __TwigTemplate_102434cd7d2327fcd291b339d4a26b7d extends Template
 
 
     
->>>>>>> cd1f5cbb091c1836479688908f79614593c2ca30
 </body>
 </html>
 ";
@@ -206,11 +205,7 @@ class __TwigTemplate_102434cd7d2327fcd291b339d4a26b7d extends Template
      */
     public function getDebugInfo(): array
     {
-<<<<<<< HEAD
-        return array (  42 => 1,);
-=======
         return array (  82 => 17,  73 => 14,  68 => 13,  64 => 12,  58 => 9,  54 => 8,  48 => 5,  42 => 1,);
->>>>>>> cd1f5cbb091c1836479688908f79614593c2ca30
     }
 
     public function getSourceContext(): Source
@@ -341,7 +336,6 @@ class __TwigTemplate_102434cd7d2327fcd291b339d4a26b7d extends Template
 
 
     
->>>>>>> cd1f5cbb091c1836479688908f79614593c2ca30
 </body>
 </html>
 ", "front/home.twig", "/var/www/html/app/View/front/home.twig");
