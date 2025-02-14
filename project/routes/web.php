@@ -4,35 +4,24 @@ use Core\Http\Router;
 
 
 
-Router::get('', 'back\\HomeControllers@index');
+// isam routes:
+Router::get('', 'front\\PropertyController@displayLatestTen');
+Router::get('/', 'front\\PropertyController@displayLatestTen');
+Router::get('home', 'front\\PropertyController@displayLatestTen');
+Router::get('property', 'front\\PropertyController@displayProperty');
 
-Router::get('/', 'front\\HomeControllers@index');
+Router::get('property/add', 'front\\PropertyController@displayAddPage');
+Router::get('property/update', 'front\\PropertyController@displayUpdatePage');
 
-Router::get('auth', 'front\\AuthController@auth');
+Router::post('property/add', 'front\\PropertyController@creatProperty');
+Router::post('property/update', 'front\\PropertyController@updateProperty');
 
-Router::get('addInformation', 'front\\AuthController@addInformation');
+Router::get('property/delete', 'front\\PropertyController@deleteProperty');
+Router::post('property/search', 'front\\PropertyController@searchProperty');
 
-
-Router::get('register', 'front\\AuthController@addInformation');
-
-
-Router::post('login', 'front\\AuthController@loginUser');
-
-Router::post('register', 'front\\AuthController@addUser');
-
-Router::get('', 'front\\HomeControllers@index');
-
-Router::get('contact', 'front\\HomeControllers@index2');
-
-Router::get('home/{id}', 'front\\HomeControllers@index');
-
-Router::get('product/{id}', 'front\\HomeControllers@index');
+Router::get('property/id', 'front\\PropertyController@getPropertyById');
 
 
+//statistic :
 
-// --------------------
-
-// Router::post('login', 'front\\AuthControllers@login');
-
-// $_post['email'];
-// $_post['password'];
+Router::get('property/statistic', 'front\\PropertyController@viewStatistiques');

@@ -20,7 +20,6 @@ class Validator
   public function validate()
   {
     foreach (Rules::$rules as $field  => $rules) {
-      // dump($field);
 
       $rules = explode('|', $rules);
 
@@ -35,8 +34,12 @@ class Validator
 
   public function applyRules($rule, $field)
   {
-    $value = trim($this->data[$field] ?? '');
 
+    if (!isset($this->data[$field])) {
+      return;
+    }
+    
+    $value = trim($this->data[$field] ?? '');
 
     if ($rule == 'required' && empty($value)) {
 
@@ -70,6 +73,11 @@ class Validator
     }
 
 
+    if ($rule == 'numeric' && !is_numeric($value)) {
+      $this->addError($field, $rule);
+    }
+
+
   }
 
 
@@ -89,7 +97,11 @@ class Validator
   }
 
 
-  
+
+
+  public function getError($field) {
+    return $this->errors[$field] ?? null;
+  }
 
   public function getErrors() {
     return $this->errors;
