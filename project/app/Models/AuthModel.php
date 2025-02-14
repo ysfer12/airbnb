@@ -3,8 +3,8 @@ namespace App\Models;
 
 use App\Entities\User;
 use Core\Database\Database;
-use Core\Mapper\UserMapper;
 use Core\Session\Session;
+use Core\Mapper\UserMapper;
 use PDO;
 use PDOException;
 
@@ -79,6 +79,8 @@ class AuthModel
 
                   
     }
+
+   
 
     public function createUser($fullname, $email, $password, $phone, $role, $image)
     {
