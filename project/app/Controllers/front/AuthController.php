@@ -6,6 +6,7 @@ namespace App\Controllers\front;
 
 // Import Google API Client
 
+use App\Entities\User;
 use App\Models\AuthModel;
 use Google\Client;
 use Google\Service\Oauth2 as Google_Service_Oauth2;
@@ -61,7 +62,7 @@ class AuthController
     {
         if($_SERVER["REQUEST_METHOD"] == "POST")
         {
-            if(isset($_POST["email"]) && isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["phonenumber"]) && isset($_FILES["profileImage"]))
+            if(isset($_POST["fullname"]) && isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["phonenumber"]) && isset($_FILES["profileImage"]) && isset($_POST["role"]))
             {
                 $fullname = $_POST["fullname"];
                 $email = $_POST["email"];
@@ -80,8 +81,46 @@ class AuthController
                 }
 
             }else {
-                echo "❌ Please fill in all required fields.";
+                $error = ['error' => "❌ Please fill in all required fields."];
+                view("front/auth" , $error);
             }
+        }
+    }
+
+    public function loginUser()
+    {
+        if ($_SERVER["REQUEST_METHOD"] === "POST")
+        {
+            $email = $_POST["email"] ?? null;
+            $password = $_POST["password"] ?? null;
+
+            if (!$email || !$password) {
+                echo "Email and password are required.";
+                return;
+            }
+
+            $authuser = new AuthModel();
+            $resault = $authuser->loginTheuser($email , $password);
+
+            if($resault == null){
+                echo "user not found please check ..."; 
+            }else{
+                $userInfo = new User;
+                if($userInfo->getRole() == "admin")
+                {
+
+                }
+                if($userInfo->getRole() == "traveler")
+                {
+
+                }
+                if($userInfo->getRole() == "owner")
+                {
+
+                }
+            }
+
+
         }
     }
 }

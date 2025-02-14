@@ -47,6 +47,7 @@ class __TwigTemplate_102434cd7d2327fcd291b339d4a26b7d extends Template
     <title>Airbnb Clone</title>
     <script src=\"https://cdn.tailwindcss.com\"></script>
 </head>
+<<<<<<< HEAD
 <body class=\"bg-gray-50\">
     
     <!-- Header -->
@@ -147,6 +148,45 @@ class __TwigTemplate_102434cd7d2327fcd291b339d4a26b7d extends Template
         });
     </script>
 
+=======
+<body>
+    <h1>";
+        // line 8
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(($context["title"] ?? null), "html", null, true);
+        yield "</h1>
+    <p>";
+        // line 9
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(($context["last_name"] ?? null), "html", null, true);
+        yield "</p>
+
+
+    ";
+        // line 12
+        $context['_parent'] = $context;
+        $context['_seq'] = CoreExtension::ensureTraversable(($context["propertys"] ?? null));
+        foreach ($context['_seq'] as $context["_key"] => $context["property"]) {
+            // line 13
+            yield "        ";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["property"], "id", [], "any", false, false, false, 13), "html", null, true);
+            yield "
+        ";
+            // line 14
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["property"], "title", [], "any", false, false, false, 14), "html", null, true);
+            yield "
+
+    ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_key'], $context['property'], $context['_parent']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 17
+        yield "
+    
+
+
+
+    
+>>>>>>> cd1f5cbb091c1836479688908f79614593c2ca30
 </body>
 </html>
 ";
@@ -166,7 +206,11 @@ class __TwigTemplate_102434cd7d2327fcd291b339d4a26b7d extends Template
      */
     public function getDebugInfo(): array
     {
+<<<<<<< HEAD
         return array (  42 => 1,);
+=======
+        return array (  82 => 17,  73 => 14,  68 => 13,  64 => 12,  58 => 9,  54 => 8,  48 => 5,  42 => 1,);
+>>>>>>> cd1f5cbb091c1836479688908f79614593c2ca30
     }
 
     public function getSourceContext(): Source
@@ -179,6 +223,7 @@ class __TwigTemplate_102434cd7d2327fcd291b339d4a26b7d extends Template
     <title>Airbnb Clone</title>
     <script src=\"https://cdn.tailwindcss.com\"></script>
 </head>
+<<<<<<< HEAD
 <body class=\"bg-gray-50\">
     
     <!-- Header -->
@@ -279,6 +324,24 @@ class __TwigTemplate_102434cd7d2327fcd291b339d4a26b7d extends Template
         });
     </script>
 
+=======
+<body>
+    <h1>{{ title }}</h1>
+    <p>{{ last_name }}</p>
+
+
+    {% for property in propertys %}
+        {{property.id}}
+        {{property.title}}
+
+    {% endfor %}
+
+    
+
+
+
+    
+>>>>>>> cd1f5cbb091c1836479688908f79614593c2ca30
 </body>
 </html>
 ", "front/home.twig", "/var/www/html/app/View/front/home.twig");

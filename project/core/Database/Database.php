@@ -18,14 +18,10 @@ class Database
             return self::$pdoSinglton;
         }
 
-        // Load environment variables (uncomment if you use .env)
-        // $dotenv = Dotenv::createImmutable(dirname(__DIR__));
-        // $dotenv->load();
 
-        // Get database connection details from environment variables
         $servername = $_ENV['DB_HOST'];
         $port = $_ENV['DB_PORT'];
-        $databasename = $_ENV['DB_NAME'];
+        $databasename = $_ENV['DB_NAME'];        
         $username = $_ENV['DB_USER'];
         $password = $_ENV['DB_PASSWORD'];
 
@@ -39,11 +35,15 @@ class Database
             $password
         );
 
+        
         try {
+
             $conn = new PDO($conStr);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             self::$pdoSinglton = $conn;
+            
+            return self::$pdoSinglton;
 
             return self::$pdoSinglton;
         } catch (PDOException $e) {
