@@ -15,6 +15,9 @@ Router::get('addInformation', 'front\\AuthController@addInformation');
 
 Router::get('register', 'front\\AuthController@addInformation');
 
+
+Router::post('login', 'front\\AuthController@loginUser');
+
 Router::post('register', 'front\\AuthController@addUser');
 
 Router::get('', 'front\\HomeControllers@index');

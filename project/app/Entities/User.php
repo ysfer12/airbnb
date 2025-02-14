@@ -10,11 +10,17 @@ class User
   protected string $email;
   protected string $phone;
   protected string $role;
+  protected $profile_picture;
   protected bool $isActive;
   protected string $createdAt;
   protected string $deletedAt;
 
   // Getters
+
+  public function getProfilePicture()
+  {
+    return $this->profile_picture;
+  }  
 
   public function getId()
   {
@@ -59,6 +65,10 @@ class User
 
   // Setters
 
+  public function setProfilepicture($profile_picture)
+  {
+    $this->profile_picture = $profile_picture;
+  }
   public function setId(int $id)
   {
     $this->id = $id;
