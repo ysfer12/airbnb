@@ -16,7 +16,7 @@ Router::get('property/update', 'front\\PropertyController@displayUpdatePage');
 Router::post('property/add', 'front\\PropertyController@creatProperty');
 Router::post('property/update', 'front\\PropertyController@updateProperty');
 
-Router::get('property/delete', 'front\\PropertyController@deleteProperty');
+Router::post('property/delete', 'front\\PropertyController@deleteProperty');
 Router::post('property/search', 'front\\PropertyController@searchProperty');
 
 Router::get('property/id', 'front\\PropertyController@getPropertyById');
@@ -24,4 +24,4 @@ Router::get('property/id', 'front\\PropertyController@getPropertyById');
 
 //statistic :
 
-Router::get('property/statistic', 'front\\PropertyController@viewStatistiques');
+Router::get('property/dashboard', 'front\\PropertyController@viewStatistiques');
