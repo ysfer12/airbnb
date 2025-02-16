@@ -1,18 +1,28 @@
-<?php
+<?php 
+
 
 namespace Core\Mapper;
 
 use App\Entities\Category;
 
+
 class CategoryMapper
 {
-  // Map database array to Category entity
-  public static function mapCategory(array $data): Category
+  
+  public static function mapCategory($data)
   {
     $category = new Category();
-    $category->setId($data['category_id']);
-    $category->setName($data['category_name']);
-    $category->setDescription($data['category_description']);
+    $category->setId($data['id'] ?? null);
+    $category->setName($data['name'] ?? null);
+    $category->setDescription($data['description'] ?? null);
+    
+
     return $category;
   }
+
+  
+
 }
+
+
+

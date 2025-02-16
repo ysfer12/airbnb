@@ -5,14 +5,14 @@ namespace App\Entities;
 class Booking
 {
 
-  private int $id;
-  private string $startDate;
-  private string $endDate;
-  private int $guestCount;
-  private float $totalPrice;
-  private string $status;
-  private Property $property;
-  private User $traveler;
+  private $id;
+  private $startDate;
+  private $endDate;
+  private $guestCount;
+  private $totalPrice;
+  private $status;
+  private $property;
+  private $traveler;
 
 
   // Getters
@@ -58,45 +58,43 @@ class Booking
 
 
   // Setters
-  public function setId(int $id)
+  public function setId($id)
   {
     $this->id = $id;
   }
 
-  public function setStartDate(string $startDate)
+  public function setStartDate($startDate)
   {
     $this->startDate = $startDate;
   }
 
-  public function setEndDate(string $endDate)
+  public function setEndDate($endDate)
   {
     $this->endDate = $endDate;
   }
 
-  public function setGuestCount(int $guestCount)
+  public function setGuestCount($guestCount)
   {
     $this->guestCount = $guestCount;
   }
 
-  public function setTotalPrice(float $totalPrice)
+  public function setTotalPrice($totalPrice)
   {
     $this->totalPrice = $totalPrice;
   }
 
-  public function setStatus(string $status)
+  public function setStatus($status)
   {
     $this->status = $status;
   }
 
-  public function setProperty(Property $property)
+  public function setProperty($property)
   {
     $this->property = $property;
   }
 
-  public function setTraveler(User $traveler)
+  public function setTraveler($traveler)
   {
     $this->traveler = $traveler;
   }
-
-
 }

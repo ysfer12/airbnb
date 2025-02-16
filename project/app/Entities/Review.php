@@ -4,12 +4,12 @@ namespace App\Entities;
 
 class Review
 {
-  private int $id;
-  private int $rating;
-  private string $comment;
-  private string $createdAt;
-  private Booking $booking;
-  private User $traveler;
+  private $id;
+  private $rating;
+  private $comment;
+  private $createdAt;
+  private $booking;
+  private $traveler;
 
 
 
@@ -46,32 +46,32 @@ class Review
 
 
   // setters:
-  public function setId(int $id)
+  public function setId($id)
   {
     $this->id = $id;
   }
 
-  public function setRating(int $rating)
+  public function setRating($rating)
   {
     $this->rating = $rating;
   }
 
-  public function setComment(string $comment)
+  public function setComment($comment)
   {
     $this->comment = $comment;
   }
 
-  public function setCreatedAt(string $createdAt)
+  public function setCreatedAt($createdAt)
   {
     $this->createdAt = $createdAt;
   }
 
-  public function setBooking(Booking $booking)
+  public function setBooking($booking)
   {
     $this->booking = $booking;
   }
 
-  public function setTraveler(User $traveler)
+  public function setTraveler($traveler)
   {
     $this->traveler = $traveler;
   }
