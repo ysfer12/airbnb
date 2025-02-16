@@ -1,52 +1,38 @@
-<?php 
-
+<?php
 
 namespace Core\Mapper;
 
 use App\Entities\Booking;
 
-
 class BookingMapper
 {
-  
-  public static function mapBooking($data)
-  {
-    $booking = new Booking();
-    $booking->setId($data['id'] ?? null);
-    $booking->setStartDate($data['startDate'] ?? null);
-    $booking->setEndDate($data['endDate'] ?? null);
-    $booking->setGuestCount($data['guestCount'] ?? null);
-    $booking->setTotalPrice($data['totalPrice'] ?? null);
-    $booking->setStatus($data['status'] ?? null);
-    
+    public static function mapBooking($data): Booking
+    {
+        $booking = new Booking();
 
+        // Map basic booking data
+        $booking->setId($data['id'] ?? null);
+        $booking->setPropertyId($data['property_id'] ?? null);
+        $booking->setTravelerId($data['traveler_id'] ?? null);
+        $booking->setStartDate($data['start_date'] ?? null);
+        $booking->setEndDate($data['end_date'] ?? null);
+        $booking->setGuestCount($data['guest_count'] ?? null);
+        $booking->setTotalPrice($data['total_price'] ?? null);
+        $booking->setStatus($data['status'] ?? null);
+        $booking->setCreatedAt($data['created_at'] ?? null);
+        $booking->setUpdatedAt($data['updated_at'] ?? null);
+        $booking->setCancellationReason($data['cancellation_reason'] ?? null);
+        $booking->setSpecialRequests($data['special_requests'] ?? null);
 
-    // call mapper property:
-    $propretyData = [
-      'id'=> $data['id'] ?? null,
-      'title'=> $data['title'] ?? null,
-      'description'=> $data['description'] ?? null
-    ];
-    
-    $booking->setProperty(PropertyMapper::mapProperty($propretyData));
+        // Map property relation data
+        $booking->setPropertyTitle($data['property_title'] ?? null);
+        $booking->setPropertyAddress($data['property_address'] ?? null);
+        $booking->setPropertyImage($data['property_image'] ?? null);
 
+        // Map traveler relation data
+        $booking->setTravelerName($data['traveler_name'] ?? null);
+        $booking->setTravelerEmail($data['traveler_email'] ?? null);
 
-    // call mapper user:
-    $UserData = [
-      'id'=> $data['id'] ?? null,
-      'name'=> $data['name'] ?? null,
-      'email'=> $data['email'] ?? null
-    ];
-
-    $booking->setTraveler(UserMapper::mapUser($UserData));
-
-
-    return $booking;
-  }
-
-  
-
+        return $booking;
+    }
 }
-
-
-

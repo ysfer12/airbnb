@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/project/app" isTestSource="false" packagePrefix="App\" />
+      <sourceFolder url="file://$MODULE_DIR$/project/core" isTestSource="false" packagePrefix="Core\" />
+      <sourceFolder url="file://$MODULE_DIR$/project/public" isTestSource="false" packagePrefix="Pub\" />
+      <sourceFolder url="file://$MODULE_DIR$/project/router" isTestSource="false" packagePrefix="Router\" />
+      <excludeFolder url="file://$MODULE_DIR$/project/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/project/vendor/graham-campbell/result-type" />
+      <excludeFolder url="file://$MODULE_DIR$/project/vendor/paypal/paypal-checkout-sdk" />
+      <excludeFolder url="file://$MODULE_DIR$/project/vendor/paypal/paypalhttp" />
+      <excludeFolder url="file://$MODULE_DIR$/project/vendor/phpmailer/phpmailer" />
+      <excludeFolder url="file://$MODULE_DIR$/project/vendor/phpoption/phpoption" />
+      <excludeFolder url="file://$MODULE_DIR$/project/vendor/stripe/stripe-php" />
+      <excludeFolder url="file://$MODULE_DIR$/project/vendor/symfony/deprecation-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/project/vendor/symfony/polyfill-ctype" />
+      <excludeFolder url="file://$MODULE_DIR$/project/vendor/symfony/polyfill-mbstring" />
+      <excludeFolder url="file://$MODULE_DIR$/project/vendor/symfony/polyfill-php80" />
+      <excludeFolder url="file://$MODULE_DIR$/project/vendor/symfony/polyfill-php81" />
+      <excludeFolder url="file://$MODULE_DIR$/project/vendor/symfony/var-dumper" />
+      <excludeFolder url="file://$MODULE_DIR$/project/vendor/tecnickcom/tcpdf" />
+      <excludeFolder url="file://$MODULE_DIR$/project/vendor/twig/twig" />
+      <excludeFolder url="file://$MODULE_DIR$/project/vendor/vlucas/phpdotenv" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

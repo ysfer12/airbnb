@@ -57,6 +57,7 @@ class Router
     if ($match) {
       [$action, $params] = $match;
 
+
       if (is_callable($action)) {
         return call_user_func($action);
       }

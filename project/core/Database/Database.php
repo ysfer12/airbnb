@@ -1,63 +1,43 @@
 <?php
-
-
-
+// Core/Database/Database.php
 namespace Core\Database;
 
-
-use  Dotenv\Dotenv;
 use PDO;
 use PDOException;
 
-
 class Database
 {
+    private static $instance = null;
+    private $conn;
 
-    private static $pdoSinglton;
+    private function __construct()
+    {
+        try {
+            $this->conn = new PDO(
+                "pgsql:host=" . $_ENV['DB_HOST'] .
+                ";port=" . $_ENV['DB_PORT'] .
+                ";dbname=" . $_ENV['DB_NAME'],
+                $_ENV['DB_USER'],
+                $_ENV['DB_PASSWORD']
+            );
 
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+        } catch(PDOException $e) {
+            die("Connection failed: " . $e->getMessage());
+        }
+    }
+
+    public static function getInstance()
+    {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
 
     public static function getConnection()
     {
-
-
-
-        // $dotenv = Dotenv::createImmutable(dirname(__DIR__));
-        // $dotenv->load();
-
-
-
-        if (self::$pdoSinglton != null) {
-            return self::$pdoSinglton;
-        }
-
-
-        $servername = $_ENV['DB_HOST'];
-        $port = $_ENV['DB_PORT'];
-        $databasename = $_ENV['DB_NAME'];        
-        $username = $_ENV['DB_USER'];
-        $password = $_ENV['DB_PASSWORD'];
-
-        $conStr = sprintf(
-            "pgsql:host=%s;port=%d;dbname=%s;user=%s;password=%s",
-            $servername,
-            $port,
-            $databasename,
-            $username,
-            $password
-        );
-
-        
-        try {
-
-            $conn = new PDO($conStr);
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            self::$pdoSinglton = $conn;
-            
-            return self::$pdoSinglton;
-
-        } catch (PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
-        }
+        return self::getInstance()->conn;
     }
 }

@@ -3,298 +3,196 @@
 namespace App\Controllers\front;
 
 use App\Models\PropertyModel;
-
 use Core\Session\Session;
 use Core\Validation\Validator;
 
 class PropertyController
 {
+    private $PropertyModel;
 
-  private $PropertyModel;
-
-  public function __construct()
-  {
-    $this->PropertyModel = new PropertyModel();
-  }
-
-
-  public function diplayAddPage()
-  { 
-    view('back/propertyadd');
-    exit;
-  }
-
-  // display Latest 10:
-  public function displayLatestTen()
-  {
-    $propertys = $this->PropertyModel->displayLatestTen();
-
-    // dump($propertys[1]);
-
-    $data = [
-      'title' => 'home',
-      'propertys' => $propertys
-    ];
-
-
-    view('front/home', $data);
-  }
-
-
-
-  // displayProperty:
-  public function displayProperty()
-  {
-    $propertys = $this->PropertyModel->displayProperty();
-
-    $data = [
-      'title' => 'Property',
-      'propertys' => $propertys
-    ];
-
-
-    view('front/home', $data);
-  }
-
-
-  // creatProperty:
-  public function creatProperty()
-  {
-
-
-
-    // "column_name property"
-    // "id"
-    // "title"
-    // "description"
-    // "price"
-    // "category_id"
-    // "photos"
-    // "is_validated"
-    // "is_available"
-    // "owner_id"
-    // "address"
-    // "latitude"
-    // "longitude"
-    // "max_guests"
-    // "bedrooms"
-    // "bathrooms"
-    // "amenities"
-    // "house_rules"
-    // "availability_dates"
-    // "base_price"
-    // "minimum_stay"
-    // "maximum_stay"
-    // "cancellation_policy"
-    // "created_at"
-    // "updated_at"
-
-
-    $data = [
-      'title' => 'Tamaris Club',
-      'description' => 'Grands et belles propriétés avec vue imprenable sur la mer.',
-      'price' =>  150,
-      'photos' => '{1.png, 2.png, 3.png}',
-      'address' => 'Marrakech, Casa Blanca, Morocco',
-      'bedrooms' => 5,
-      'bathrooms' => 4,
-      'is_validated' => 'true',
-      'is_available' => 'true',
-      'created_at' => '2022/10/15',
-      // 'rating' => '4.8',
-      'owner_id' => 3,
-      'category_id' => 7,
-      'latitude' => 33.5897,
-      'longitude' => -7.6038,
-      'max_guests' => 10,
-      'amenities' => '{wifi, pool, gym, parking, air conditioning}',
-      'house_rules' => 'No smoking, no pets, check-in after 3pm, check-out before 11am',
-      'availability_dates' => json_encode([
-                              'start_date' => '2025/01/01',
-                              'end_date' => '2025/12/31']),
-      'base_price' => 120,
-      'minimum_stay' => 3,
-      'maximum_stay' => 30,
-      'cancellation_policy' => 'Full refund up to 7 days before check-in.',
-      'updated_at' => '2025/02/12',
-    ];
-
-
-    // call validator:
-    $validatorAdd = new Validator($data);
-
-
-
-    if ($validatorAdd->isErrors()) {
-      Session::setSession('errorAdd', $validatorAdd->getErrors());
-
-
-      redirect('');
-
-      dump(Session::getSession('errorAdd'));
-
-      exit;
+    public function __construct()
+    {
+        $this->PropertyModel = new PropertyModel();
     }
 
+    public function getPropertyById($id)
+    {
+        // Validate ID
+        $validator = new Validator(['id' => $id]);
 
-    dump(Session::getSession('errorAdd'));
+        if ($validator->isErrors()) {
+            Session::setSession('error', $validator->getErrors());
+            redirect('property');
+            exit;
+        }
 
-    $creatProperty = $this->PropertyModel->creatProperty($data);
+        // Get property data
+        $property = $this->PropertyModel->getPropertyById($id);
 
-    if (!$creatProperty) {
+        if (!$property) {
+            Session::setSession('error', 'Property not found');
+            redirect('property');
+            exit;
+        }
 
-      Session::setSession('errorAdd', 'property not added');
-    
-    }
-    
-    
-    redirect('');
-    exit;
-    // redirect('home');
-  }
+        // Check if user is logged in for booking
+        $isLoggedIn = Session::getSession('user_id') ? true : false;
 
+        // Prepare data for view
+        $data = [
+            'title' => $property->getTitle(),
+            'property' => $property,
+            'isLoggedIn' => $isLoggedIn
+        ];
 
-  // updateProperty :
-
-  public function updateProperty()
-  {
-    $data = [
-      'id'=> 8,
-      'title' => 'Tamaris Clubs',
-      'description' => 'Grands et belles propriétés avec vue imprenable sur la mer.',
-      'price' =>  150,
-      'photos' => '{1.png, 2.png, 3.png}',
-      'address' => 'Marrakech, Casa Blanca, Morocco',
-      'bedrooms' => 5,
-      'bathrooms' => 4,
-      'is_validated' => 'true',
-      'is_available' => 'true',
-      'created_at' => '2022/10/15',
-      // 'rating' => '4.8',
-      'owner_id' => 3,
-      'category_id' => 7,
-      'latitude' => 33.5897,
-      'longitude' => -7.6038,
-      'max_guests' => 10,
-      'amenities' => '{wifi, pool, gym, parking, air conditioning}',
-      'house_rules' => 'No smoking, no pets, check-in after 3pm, check-out before 11am',
-      'availability_dates' => json_encode([
-                              'start_date' => '2025/01/01',
-                              'end_date' => '2025/12/31']),
-      'base_price' => 120,
-      'minimum_stay' => 3,
-      'maximum_stay' => 30,
-      'cancellation_policy' => 'Full refund up to 7 days before check-in.',
-      'updated_at' => '2025/02/12',
-    ];
-
-
-    
-    // call validator:
-    $validatorUpdate = new Validator($data);
-
-
-    if ($validatorUpdate->isErrors()) {
-      Session::setSession('errorUpdate', $validatorUpdate->getErrors());
-
-
-      redirect('');
-
-      dump(Session::getSession('errorUpdate'));
-
-      exit;
+        // Render the view
+        view('front/property_details', $data);
+        exit;
     }
 
+    public function displayLatestTen()
+    {
+        $properties = $this->PropertyModel->displayLatestTen();
 
-    // dump(Session::getSession('errorUpdate'));
+        $data = [
+            'title' => 'home',
+            'properties' => $properties
+        ];
 
-    $updateProperty = $this->PropertyModel->updateProperty($data);
-
-    if (!$updateProperty) {
-
-      Session::setSession('errorUpdate', 'property not updated');
-      return;
-      
+        view('front/property', $data);
     }
 
-    // redirect('');
-    
-    dump('update success');
+    public function displayProperty()
+    {
+        $properties = $this->PropertyModel->displayProperty();
 
-    exit;
+        $data = [
+            'title' => 'Property',
+            'properties' => $properties
+        ];
 
-
-  }
-
-
-
-
-
-
-
-  // deleteProperty :
-  public function deleteProperty()
-  {
-    $id = 8;
-
-    $deleteProperty = $this->PropertyModel->deleteProperty($id);
-
-    if (!$deleteProperty) {
-
-      Session::setSession('errorDelete', 'property not deleted');
-      
-      return;
+        view('front/property', $data);
     }
 
-    dump('delete success');
+    public function createProperty()
+    {
+        $data = [
+            'title' => 'Tamaris Club',
+            'description' => 'Grands et belles propriétés avec vue imprenable sur la mer.',
+            'price' => 150,
+            'photos' => '{1.png, 2.png, 3.png}',
+            'address' => 'Marrakech, Casa Blanca, Morocco',
+            'bedrooms' => 5,
+            'bathrooms' => 4,
+            'is_validated' => true,
+            'is_available' => true,
+            'created_at' => '2022-10-15',
+            'owner_id' => 3,
+            'category_id' => 7,
+            'latitude' => 33.5897,
+            'longitude' => -7.6038,
+            'max_guests' => 10,
+            'amenities' => '{wifi, pool, gym, parking, air conditioning}',
+            'house_rules' => 'No smoking, no pets, check-in after 3pm, check-out before 11am',
+            'availability_dates' => json_encode([
+                'start_date' => '2025-01-01',
+                'end_date' => '2025-12-31',
+            ]),
+            'base_price' => 120,
+            'minimum_stay' => 3,
+            'maximum_stay' => 30,
+            'cancellation_policy' => 'Full refund up to 7 days before check-in.',
+            'updated_at' => '2025-02-12',
+        ];
 
-    exit;
-  }
+        $validator = new Validator($data);
 
+        if ($validator->isErrors()) {
+            Session::setSession('errorAdd', $validator->getErrors());
+            redirect('');
+            exit;
+        }
 
+        $createdProperty = $this->PropertyModel->creatProperty($data);
 
+        if (!$createdProperty) {
+            Session::setSession('errorAdd', 'Property not added.');
+        }
 
-  // searchProperty
-  public function searchProperty()
-  {
-
-    header('Content-Type: application/json');
-
-    $json = file_get_contents("php://input");
-    $search = json_decode($json, true);
-
-
-    $search['search'] = 'Luxury';
-    
-
-    $validatorSearch = new Validator(['title' => $search['search']]);
-  
-    if (!$validatorSearch) {
-      echo json_encode(['success' => false, 'message' => 'data not valid']);      
+        redirect('');
+        exit;
     }
-    
 
-    $searchProperty = $this->PropertyModel->searchProperty($search['search']);
+    public function searchProperty()
+    {
+        header('Content-Type: application/json');
 
-    // dump($searchProperty);
+        $json = file_get_contents('php://input');
+        $search = json_decode($json, true);
 
-    echo json_encode(['success' => true, 'data' => $searchProperty]);
+        $validator = new Validator(['title' => $search['search'] ?? '']);
 
+        if ($validator->isErrors()) {
+            echo json_encode(['success' => false, 'message' => $validator->getErrors()]);
+            exit;
+        }
 
-    exit;
-  }
+        $searchResult = $this->PropertyModel->searchProperty($search['search'] ?? '');
 
+        echo json_encode(['success' => true, 'data' => $searchResult]);
+        exit;
+    }
 
+    public function checkAvailability($id)
+    {
+        header('Content-Type: application/json');
 
-  // getById :
+        $json = file_get_contents('php://input');
+        $data = json_decode($json, true);
 
+        $validator = new Validator([
+            'check_in' => $data['check_in'],
+            'check_out' => $data['check_out']
+        ]);
 
-  // getByName :
+        if ($validator->isErrors()) {
+            echo json_encode(['success' => false, 'message' => $validator->getErrors()]);
+            exit;
+        }
 
-  // validateProperty :
+        $property = $this->PropertyModel->getPropertyById($id);
 
-  // viewStatistiques :
+        if (!$property) {
+            echo json_encode(['success' => false, 'message' => 'Property not found']);
+            exit;
+        }
 
+        // Check if property is available for the dates
+        $isAvailable = $this->PropertyModel->checkAvailability(
+            $id,
+            $data['check_in'],
+            $data['check_out']
+        );
 
+        echo json_encode([
+            'success' => true,
+            'available' => $isAvailable,
+            'minimum_stay' => $property->getMinimumStay(),
+            'maximum_stay' => $property->getMaximumStay()
+        ]);
+        exit;
+    }
 
+    public function getBookedDates($id)
+    {
+        header('Content-Type: application/json');
+
+        $bookedDates = $this->PropertyModel->getBookedDates($id);
+
+        echo json_encode([
+            'success' => true,
+            'dates' => $bookedDates
+        ]);
+        exit;
+    }
 }
