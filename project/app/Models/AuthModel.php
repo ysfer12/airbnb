@@ -5,6 +5,7 @@ use App\Entities\User;
 use Core\Database\Database;
 use Core\Session\Session;
 use Core\Mapper\UserMapper;
+use ParagonIE\ConstantTime\Base64;
 use PDO;
 use PDOException;
 
@@ -80,7 +81,12 @@ class AuthModel
                   
     }
 
+    // public function FunctionName() : int {
+        
+    //     return $stmt->lastinsertedid();
+    // }
    
+    //setId($this->user->create());
 
     public function createUser($fullname, $email, $password, $phone, $role, $image)
     {
@@ -100,8 +106,8 @@ class AuthModel
         $allowedTypes = ["jpg", "jpeg", "png", "gif"];
         if (!in_array($imageFileType, $allowedTypes)) {
             return "Invalid image format. Only JPG, JPEG, PNG, and GIF are allowed.";
-        }
-    
+        } 
+    // Base64            methode fo upload img
         if (!is_dir($uploadDir)) {
             if (!mkdir($uploadDir, 0755, true) && !is_dir($uploadDir)) {
                 return "Failed to create upload directory.";

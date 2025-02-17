@@ -25,7 +25,17 @@ class UserMapper
     return $user;
   }
   
+public function __call($name, $arguments)
+{
+  if($name=='Mapper'){
+if(count($arguments)==2){
 
+  
+
+}
+
+  }
+}
 }
 
 
