@@ -147,7 +147,10 @@ class PropertyController
 
   public function deleteProperty()
   {
-    $id = 8;
+
+
+    $id = $_POST['property_id'];
+
 
     $validator = new Validator(['id' => $id]);
 
@@ -163,7 +166,8 @@ class PropertyController
       return;
     }
 
-    dump('Delete success.');
+    redirect('/property/dashboard');
+    
     exit;
   }
 
@@ -243,9 +247,23 @@ class PropertyController
     $dataStatic['PropertiesPerOwner'] = $getPropertiesPerOwner;
     
 
-    
-    dump($dataStatic);
 
+    $properties = $this->propertyModel->displayProperty();
+
+    $data = [
+      'title' => 'Property',
+      'dataStatic' => $dataStatic,
+      'properties' => $properties,
+    ];
+
+
+
+
+
+    view('back/dashboardPropertiesAdmin/DashboardProperties', $data);
+    
+
+    exit;
 
   } 
 
